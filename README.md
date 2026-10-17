@@ -14,9 +14,9 @@ Click on image to enlarge.
 
 ### Installation
 - Download [latest release](https://github.com/Mugnum/MusicClassificationUtility/releases) and extract files anywhere.
-- Launch MusicClassification.GUI.exe.
-- On first launch: Settings window will show up, requiring to perform first setup.
-- Optionally update "Runtime folder", otherwise 3 Gb files will end up in your %localappdata%.
+- Launch `MusicClassification.GUI.exe`.
+- On first launch: a settings window will show up, requiring to perform first setup.
+- Optionally update "Runtime folder" path, otherwise 3 Gb files will end up in your %localappdata%.
 - Press "Initialize..." and then "Save".
 
 ### License
