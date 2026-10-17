@@ -24,7 +24,7 @@ Music Classification Utility's original application code and Python adapter are 
 Copyright © 2026 Sergey Syrtsev.
 
 ### Third-party notices
-This project utilizes [MAEST](https://github.com/palonso/MAEST) (Music Audio Efficient Spectrogram Transformer) by Pablo Alonso-Jiménez, Xavier Serra and Dmitry Bogdanov. First setup of this application downloads the upstream codebase (linked in [runtime-manifest.json](https://github.com/Mugnum/MusicClassificationUtility/blob/master/python/runtime-manifest.json)) and downloads it to user's `runtime\vendor` directory. MAEST's source code is licensed under AGPL-3.0.
+This project utilizes [MAEST](https://github.com/palonso/MAEST) (Music Audio Efficient Spectrogram Transformer) by Pablo Alonso-Jiménez, Xavier Serra and Dmitry Bogdanov. First setup of this application downloads the upstream codebase (linked in [runtime-manifest.json](https://github.com/Mugnum/MusicClassificationUtility/blob/master/python/runtime-manifest.json)) into user's `runtime\vendor` directory. MAEST's source code is licensed under AGPL-3.0.
 
 Analysis uses `discogs-maest-30s-pw-129e-519l-swa.ckpt`, which is downloaded during initialization from MAEST's release. The checkpoint is supplied unchanged and is not included in this repository or release.
 
