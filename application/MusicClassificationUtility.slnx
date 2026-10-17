@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Application/">
+    <Project Path="MusicClassification.GUI/MusicClassification.GUI.csproj" />
+    <Project Path="MusicClassification.Core/MusicClassification.Core.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="../LICENSE" />
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/scripts/">
+    <File Path="../scripts/Build.ps1" />
+  </Folder>
+  <Folder Name="/Solution Items/media/" />
+  <Folder Name="/Tests/">
+    <Project Path="MusicClassification.Tests/MusicClassification.Tests.csproj" />
+  </Folder>
+</Solution>

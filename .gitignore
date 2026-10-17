@@ -7,7 +7,7 @@
 **/.cache/
 **/test-artifacts/
 artifacts/
-runtime/
+/runtime/
 *.user
 *.suo
 *.ckpt

@@ -8,7 +8,7 @@ $artifacts = Join-Path $RepositoryRoot 'artifacts'
 $packageName = if ($SelfContained) { 'MusicClassificationUtility-win-x64-self-contained' } else { 'MusicClassificationUtility-win-x64' }
 $publish = Join-Path $artifacts $packageName
 $includeRuntime = if ($SelfContained) { 'true' } else { 'false' }
-& dotnet build (Join-Path $RepositoryRoot 'MusicClassificationUtility.slnx') -c Release --nologo -m:1
+& dotnet build (Join-Path $RepositoryRoot 'application\MusicClassificationUtility.slnx') -c Release --nologo -m:1
 if ($LASTEXITCODE -ne 0) { throw 'Solution build failed.' }
 & dotnet run --project (Join-Path $RepositoryRoot 'application\MusicClassification.Tests') -c Release --no-build
 if ($LASTEXITCODE -ne 0) { throw 'Core checks failed.' }
