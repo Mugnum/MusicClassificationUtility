@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Mugnum.MusicClassificationUtility.GUI.Windows.MainWindow" Style="{StaticResource {x:Type Window}}" Title="Music Classification Utility" Width="1340" Height="820" MinWidth="1050" MinHeight="660" WindowStartupLocation="CenterScreen" Closing="OnWindowClosing">
+	<Grid Margin="24">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid Margin="0,0,0,22">
+			<StackPanel>
+				<TextBlock Text="Music Classification Utility" FontSize="25" FontWeight="SemiBold"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+				<StackPanel x:Name="ReadinessPanel" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0" Visibility="Collapsed">
+					<Ellipse Width="8" Height="8" Fill="#DC2626" VerticalAlignment="Center" Margin="0,0,7,0"/>
+					<TextBlock Text="Not ready" Foreground="#B91C1C" VerticalAlignment="Center"/>
+				</StackPanel>
+				<Border x:Name="SettingsAttentionBorder" BorderBrush="Transparent" BorderThickness="2" CornerRadius="8" Padding="2">
+					<Button x:Name="SettingsButton" Content="Settings" Margin="0" Click="OnSettingsClick"/>
+				</Border>
+			</StackPanel>
+		</Grid>
+		<Grid Grid.Row="1" Margin="0,0,0,12">
+			<StackPanel Orientation="Horizontal">
+				<Button Content="Import…" Click="OnImportClick"/>
+				<TextBlock Text="or drop audio files onto the list" Foreground="#65748B" VerticalAlignment="Center" Margin="5,0,0,0"/>
+			</StackPanel>
+			<TextBlock x:Name="CountText" Text="0/0 analyzed" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#65748B"/>
+		</Grid>
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" MinWidth="620"/>
+				<ColumnDefinition Width="14"/>
+				<ColumnDefinition Width="340" MinWidth="280"/>
+			</Grid.ColumnDefinitions>
+			<Border Background="White" BorderBrush="#DBE1EB" BorderThickness="1" CornerRadius="8" ClipToBounds="True">
+				<Grid>
+					<DataGrid x:Name="TracksGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow" HeadersVisibility="Column" GridLinesVisibility="None" RowHeaderWidth="0" RowHeight="72" BorderThickness="0" Background="White" EnableRowVirtualization="True" SelectionChanged="OnSelectionChanged" AllowDrop="True" PreviewDragOver="OnTracksDragOver" Drop="OnTracksDrop">
+						<DataGrid.Columns>
+							<DataGridTemplateColumn Header="TRACK" Width="1.2*" MinWidth="145">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<StackPanel VerticalAlignment="Center" ToolTip="{Binding FullPath}">
+											<TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+											<TextBlock Text="{Binding Description}" Foreground="#65748B" FontSize="11" Margin="0,4,0,0"/>
+										</StackPanel>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="GENRE SUMMARY" Width="*" MinWidth="115">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding GenreSummary}" Foreground="#65748B" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="12"/>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="STATUS" Width="155">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<StackPanel VerticalAlignment="Center" ToolTip="{Binding Error}">
+											<TextBlock Text="{Binding StatusText}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+											<ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" IsIndeterminate="{Binding IsIndeterminate}" Height="4" Margin="0,7,0,0" Foreground="#2563EB" Background="#E7EDF6" BorderThickness="0"/>
+										</StackPanel>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="" Width="96">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<Button Content="Analyze" Padding="9,6" FontSize="12" Margin="0" Click="OnAnalyzeClick" VerticalAlignment="Center">
+											<Button.Style>
+												<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+													<Setter Property="IsEnabled" Value="False"/>
+													<Style.Triggers>
+														<MultiDataTrigger>
+															<MultiDataTrigger.Conditions>
+																<Condition Binding="{Binding CanAnalyze}" Value="True"/>
+																<Condition Binding="{Binding IsRuntimeReady, RelativeSource={RelativeSource AncestorType=Window}}" Value="True"/>
+															</MultiDataTrigger.Conditions>
+															<Setter Property="IsEnabled" Value="True"/>
+														</MultiDataTrigger>
+													</Style.Triggers>
+												</Style>
+											</Button.Style>
+										</Button>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+					<TextBlock x:Name="EmptyText" Text="Drop songs here to get started" Foreground="#8A98AC" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
+				</Grid>
+			</Border>
+			<GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" Background="Transparent"/>
+			<Border Grid.Column="2" Background="White" BorderBrush="#DBE1EB" BorderThickness="1" CornerRadius="8" Padding="19">
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+					<StackPanel>
+						<TextBlock Text="TRACK DETAILS" FontSize="11" FontWeight="SemiBold" Foreground="#65748B" Margin="0,0,0,15"/>
+						<TextBlock x:Name="DetailTitle" Text="Select a track" FontSize="19" FontWeight="SemiBold" TextWrapping="Wrap"/>
+						<TextBlock x:Name="DetailPath" Foreground="#77859A" FontSize="11" TextWrapping="Wrap" Margin="0,8,0,12"/>
+						<TextBlock x:Name="DetailStatus" Foreground="#425B7A" TextWrapping="Wrap" Margin="0,0,0,16"/>
+						<StackPanel x:Name="ResultPanel" Visibility="Collapsed">
+							<TextBlock Text="OVERALL · DURATION-WEIGHTED" FontSize="11" FontWeight="SemiBold" Foreground="#65748B" Margin="0,0,0,8"/>
+							<ItemsControl x:Name="OverallList">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Display}" Margin="0,4" FontSize="12" TextWrapping="Wrap"/>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+							<TextBlock Text="Scores are independent model outputs, not calibrated probabilities." FontSize="11" Foreground="#77859A" TextWrapping="Wrap" Margin="0,12,0,15"/>
+							<TextBlock x:Name="WarningsText" Foreground="#9A6700" TextWrapping="Wrap" FontSize="12" Margin="0,0,0,15"/>
+							<TextBlock Text="ANALYSIS WINDOWS" FontSize="11" FontWeight="SemiBold" Foreground="#65748B" Margin="0,0,0,10"/>
+							<ItemsControl x:Name="WindowsList">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Expander Header="{Binding Range}" Margin="0,0,0,7">
+											<StackPanel Margin="5,7,0,7">
+												<TextBlock Text="{Binding ValidDurationSeconds, StringFormat='Weight: {0:0.00}s of original audio'}" Foreground="#65748B" FontSize="11"/>
+												<TextBlock Text="{Binding PaddingText}" Foreground="#9A6700" FontSize="11" Margin="0,4,0,4"/>
+												<ItemsControl ItemsSource="{Binding TopGenres}">
+													<ItemsControl.ItemTemplate>
+														<DataTemplate>
+															<TextBlock Text="{Binding Display}" TextWrapping="Wrap" FontSize="11" Margin="0,3"/>
+														</DataTemplate>
+													</ItemsControl.ItemTemplate>
+												</ItemsControl>
+											</StackPanel>
+										</Expander>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</StackPanel>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+		</Grid>
+		<Grid Grid.Row="3" Margin="0,16,0,0">
+			<StackPanel Orientation="Horizontal">
+				<Button x:Name="ClearButton" Content="Clear" Click="OnClearClick"/>
+				<Button x:Name="ExportButton" Content="Export…" Click="OnExportClick"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+				<Button x:Name="CancelButton" Content="Cancel" IsEnabled="False" Click="OnCancelClick"/>
+				<Button x:Name="RunButton" Content="Run analysis" Background="#2563EB" Foreground="White" BorderBrush="#2563EB" Margin="0" Click="OnRunClick"/>
+			</StackPanel>
+		</Grid>
+		<TextBlock Grid.Row="4" x:Name="StatusText" Text="Ready" Foreground="#65748B" Margin="0,14,0,0" FontSize="12" TextWrapping="Wrap"/>
+	</Grid>
+</Window>
+

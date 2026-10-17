@@ -1,0 +1,17 @@
+.vs/
+**/bin/
+**/obj/
+**/__pycache__/
+**/*.pyc
+**/.venv/
+**/.cache/
+**/test-artifacts/
+artifacts/
+runtime/
+*.user
+*.suo
+*.ckpt
+*.onnx
+*.pb
+*.zip
+runtime.local.json

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Mugnum.MusicClassificationUtility.GUI.Windows.SettingsWindow" Style="{StaticResource {x:Type Window}}" Title="Settings" Width="720" Height="710" MinWidth="650" MinHeight="550" WindowStartupLocation="CenterOwner">
+	<Grid Margin="24">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<StackPanel>
+				<TextBlock Text="Runtime folder (.venv and vendor)" Margin="0,0,0,5"/>
+				<DockPanel>
+					<Button Content="…" DockPanel.Dock="Right" Margin="8,0,0,0" Padding="12,6" Tag="Runtime" Click="OnBrowseClick"/>
+					<TextBox x:Name="RuntimeBox" TextChanged="OnRuntimePathChanged"/>
+				</DockPanel>
+				<TextBlock Text="FFmpeg bin folder (leave empty to use PATH)" Margin="0,14,0,5"/>
+				<DockPanel>
+					<Button Content="…" DockPanel.Dock="Right" Margin="8,0,0,0" Padding="12,6" Tag="Ffmpeg" Click="OnBrowseClick"/>
+					<TextBox x:Name="FfmpegBox" TextChanged="OnRuntimePathChanged"/>
+				</DockPanel>
+				<TextBlock Text="Model folder (leave empty for runtime/models)" Margin="0,14,0,5"/>
+				<DockPanel>
+					<Button Content="…" DockPanel.Dock="Right" Margin="8,0,0,0" Padding="12,6" Tag="Model" Click="OnBrowseClick"/>
+					<TextBox x:Name="ModelBox" TextChanged="OnRuntimePathChanged"/>
+				</DockPanel>
+				<Grid Margin="0,16,0,20">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<StackPanel>
+						<TextBlock Text="CPU threads" Margin="0,0,0,5"/>
+						<TextBox x:Name="ThreadsBox" Width="90" HorizontalAlignment="Left"/>
+					</StackPanel>
+					<StackPanel Grid.Column="1">
+						<TextBlock Text="Model idle retention (minutes)" Margin="0,0,0,5"/>
+						<TextBox x:Name="RetentionBox" Width="100" HorizontalAlignment="Left" ToolTip="0 keeps the model loaded until exit. Otherwise use 1–43200 minutes. Active analysis is never interrupted. Invalid values are corrected when saved."/>
+					</StackPanel>
+				</Grid>
+				<CheckBox x:Name="AnalyzeOnImportBox" Content="Automatically queue analysis when songs are imported" Margin="0,0,0,14"/>
+				<CheckBox x:Name="OpenExportBox" Content="Open exported text files in the default editor" Margin="0,0,0,20"/>
+				<TextBlock Text="Runtime initialization" FontWeight="SemiBold" Margin="0,0,0,7"/>
+				<TextBlock Text="Choose the folders above, then initialize the runtime and download the model. uv and FFmpeg must already be installed." Foreground="#65748B" TextWrapping="Wrap" FontSize="12" Margin="0,0,0,10"/>
+				<StackPanel Orientation="Horizontal">
+					<Border x:Name="InitializeAttentionBorder" BorderBrush="Transparent" BorderThickness="2" CornerRadius="8" Padding="2" Margin="0,0,4,0">
+						<Button Content="Initialize…" Margin="0" Click="OnInitializeClick"/>
+					</Border>
+					<Button Content="Recheck" VerticalAlignment="Center" Click="OnRecheckClick"/>
+				</StackPanel>
+				<TextBlock x:Name="ReadinessText" Foreground="#65748B" TextWrapping="Wrap" FontSize="12" Margin="0,8,0,20"/>
+				
+			</StackPanel>
+		</ScrollViewer>
+		<Border Grid.Row="1" Background="#F7F9FC" BorderBrush="#DBE1EB" BorderThickness="0,1,0,0" Padding="24,16" Margin="-24,20,-24,-24">
+			<Grid>
+				<Button x:Name="ResetButton" Content="Reset to defaults" HorizontalAlignment="Left" Click="OnResetClick"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button Content="Cancel" IsCancel="True"/>
+					<Button x:Name="SaveButton" Content="Save" IsDefault="True" Background="{StaticResource Accent}" BorderBrush="{StaticResource Accent}" Foreground="White" Click="OnSaveClick" Margin="0"/>
+				</StackPanel>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>
+

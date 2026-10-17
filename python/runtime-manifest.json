@@ -1,0 +1,20 @@
+{
+  "source": {
+    "repository": "https://github.com/palonso/MAEST",
+    "commit": "b667d608380b7e32dde28939fd2f09bbc8cf5e8c",
+    "url": "https://codeload.github.com/palonso/MAEST/zip/b667d608380b7e32dde28939fd2f09bbc8cf5e8c",
+    "archive": "maest-b667d608380b7e32dde28939fd2f09bbc8cf5e8c.zip",
+    "directory": "MAEST-b667d608380b7e32dde28939fd2f09bbc8cf5e8c",
+    "sha256": "0d803d33af8573576909365c3aad4fcfe71783c83d2f3375003d46cde24c6576"
+  },
+  "model": {
+    "architecture": "discogs-maest-30s-pw-129e-519l",
+    "filename": "discogs-maest-30s-pw-129e-519l-swa.ckpt",
+    "url": "https://github.com/palonso/MAEST/releases/download/v0.0.0-beta/discogs-maest-30s-pw-129e-519l-swa.ckpt",
+    "sha256": "d6044e642b6ae295ee1164cc52b33ac663e247f03b4b100a0af1a5edfab18cdb",
+    "size_bytes": 344878270,
+    "sample_rate": 16000,
+    "window_seconds": 30,
+    "labels": 519
+  }
+}
