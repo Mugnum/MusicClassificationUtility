@@ -9,7 +9,7 @@ Click on image to enlarge.
 ### Prerequisites
 - [.NET 10.0 Runtime - Windows x64](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 - [Python 3.12 and Astral uv](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
-- [FFmpeg](https://ffmpeg.org/download.html#build-windows)
+- [FFmpeg](https://ffmpeg.org/download.html)
 - At least 3 Gb of available disk space (7 Gb via hardlinks)
 
 ### Installation
