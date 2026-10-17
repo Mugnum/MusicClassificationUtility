@@ -20,7 +20,7 @@ Click on image to enlarge.
 - Press "Initialize..." and then "Save".
 
 ### License
-Music Classification Utility's original application code and Python adapter are licensed under GNU Affero General Public License v3.0, see [LICENSE](https://github.com/Mugnum/MusicClassificationUtility/blob/master/LICENSE).  
+Music Classification Utility's application code and Python adapter are licensed under GNU Affero General Public License v3.0, see [LICENSE](https://github.com/Mugnum/MusicClassificationUtility/blob/master/LICENSE).  
 Copyright © 2026 Sergey Syrtsev.
 
 ### Third-party notices
